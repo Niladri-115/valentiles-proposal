@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body 
+        {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container 
+        {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        h1 
+        {
+            color: #ff4d4d;
+            font-size: 2.5rem;
+        }
+        p 
+        {
+            color: #666;
+            font-size: 1.2rem;
+        }
+        button 
+        {
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover 
+        {
+            background-color: #e60000;
+        }
+        input[type="text"] 
+        {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="namePage">
+        <h1>Welcome!</h1>
+        <p>Please enter your name to proceed:</p>
+        <input type="text" id="nameInput" placeholder="Your Name">
+        <button onclick="goToProposalPage()">Submit</button>
+    </div>
+
+    <div class="container" id="proposalPage">
+        <h1>Will You Be My Valentine?</h1>
+        <p>Life is brighter, happier, and more beautiful with you. Will you be mine forever?</p>
+        <button onclick="goToLoveInputPage()">Yes, I Will!</button>
+    </div>
+
+    <div class="container" id="loveInputPage">
+        <h1>Thank You!</h1>
+        <p>Please tell me what you love about me:</p>
+        <input type="text" id="loveInput" placeholder="What do you love about me?">
+        <button onclick="handleProposal()">Submit</button>
+    </div>
+
+    <script>
+        document.getElementById('namePage').style.display = 'block';
+
+        function goToProposalPage() {
+            var name = document.getElementById('nameInput').value;
+            if (name) {
+                localStorage.setItem('userName', name);
+                document.getElementById('namePage').style.display = 'none';
+                document.getElementById('proposalPage').style.display = 'block';
+            } else {
+                alert("Please enter your name.");
+            }
+        }
+
+        function goToLoveInputPage() {
+            document.getElementById('proposalPage').style.display = 'none';
+            document.getElementById('loveInputPage').style.display = 'block';
+        }
+
+        function handleProposal() {
+            var name = localStorage.getItem('userName');
+            var loveInput = document.getElementById('loveInput').value;
+            if (loveInput) {
+                // Simulate a notification to you about the user's response
+                alert("Notification: " + name + " has accepted your proposal and said they love you because: " + loveInput);
+
+                // Display the congratulations message
+                document.getElementById('loveInputPage').style.display = 'none';
+                document.getElementById('congratsPage').style.display = 'block';
+            } else {
+                alert("Please tell me what you love about me.");
+            }
+        }
+    </script>
+
+    <div class="container" id="congratsPage">
+        <h1>Congratulations!</h1>
+        <p>Thank you for being mine! ❤️</p>
+    </div>
+
+</body>
+</html>
